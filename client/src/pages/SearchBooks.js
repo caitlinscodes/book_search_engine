@@ -16,18 +16,11 @@ import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
 import Auth from '../utils/auth';
 
 const SearchBooks = () => {
-
-  // TODO: using useState, create a variable and setter for searchedBooks. The default value should be an empty array.
   const [searchedBooks, setSearchedBooks] = useState(getSearchedBooks());
-  // TODO: using useState, create a variable and setter for searchInput. The default value should be an empty string.
   const [searchInput, setSearchInput] = useState(getSearchInput());
-  // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
-
   const [saveBook, { error }] = useMutation(SAVE_BOOK);
 
-  // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
-  // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
@@ -41,18 +34,8 @@ const SearchBooks = () => {
     }
 
     try {
-      
-      /* TODO: create a fetch get request to:
-         https://www.googleapis.com/books/v1/volumes?q=${searchInput}
-         
-         The variable name for the request is shown on line 51.
-      */
-      fetch('https://www.googleapis.com/books/v1/volumes?q=${searchInput}', {
-        method: 'GET',
-        body: JSON.stringify()
-      })
-
-
+      const response = await fetch('https://www.googleapis.com/books/v1/volumes?q=${searchInput}');
+       
       if (!response.ok) {
         throw new Error('something went wrong!');
       }
