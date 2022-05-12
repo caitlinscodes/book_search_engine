@@ -7,7 +7,6 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-
 import SearchBooks from './pages/SearchBooks';
 import SavedBooks from './pages/SavedBooks';
 import Navbar from './components/Navbar';
@@ -38,8 +37,7 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    
-    // TODO: Insert the Appllo Provider and also the closing tag at the end 
+  
     <ApolloProvider client={client}>
       <Router>
         <>
